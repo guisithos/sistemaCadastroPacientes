@@ -4,13 +4,16 @@
 #include <stdlib.h>
 #include <windows.h>
 
+/* Definir o registro chamado paciente, onde entram todos os dados */
+
 struct paciente{
-    char paciente_cpf[15];
-    char nome_paciente[20];
-    char endereco_paciente[20];
-    int nascimento_paciente[20];
-    char email_paciente[15];
-    int telefone_paciente[20];
+    char paciente_cpf[11];
+    char nome_paciente[35];
+    char endereco_paciente[40];
+    int nascimento_paciente[4];
+    char email_paciente[35];
+    int telefone_paciente[11];
+    char comorbidade_paciente[30];
 };
 
 struct paciente pac;
@@ -132,21 +135,21 @@ void Reset_Window(){
 
 void window(){
     Drawing_Rectangle();
-    x_and_y_coordinates(28,2);
-    SetColor(35);
-    printf("Cadastro de Pacientes - COVID19");
+    x_and_y_coordinates(16,2);
+    SetColor(13);
+    printf("Cadastro de Pacientes - COVID 19");
     x_and_y_coordinates(20,3);
     printf("PIM IV - Guilherme Thomas");
     x_and_y_coordinates(31,4);
     printf("UNIP");
-    x_and_y_coordinates(25,24);
-    SetColor(17);
+    x_and_y_coordinates(22,24);
+    SetColor(13);
 
 }
 
 
 void print_heading(const char st[]){
-    Setting_Color_And_Background(31,28);
+    Setting_Color_And_Background(15,1);
     x_and_y_coordinates(38,8);printf("Cadastro de Pacientes : %s",st);
     Setting_Color_And_Background(17,15);
 }
@@ -157,7 +160,7 @@ int configuration_record(char id[]){
 
 void cadastro_paciente(){
     Reset_Window();
-    print_heading("Cadastrar");
+    print_heading("Inserir dados");
     int print = 37;
     FILE *openfile;
     openfile = fopen("record.txt","ab+");
@@ -173,8 +176,9 @@ void cadastro_paciente(){
         x_and_y_coordinates(print,16);printf("Data de Nascimento: ");gets(pac.nascimento_paciente);
         x_and_y_coordinates(print,18);printf("Email: ");scanf("%d",&pac.email_paciente);
         x_and_y_coordinates(print,20);printf("Telefone: ");scanf("%d",&pac.telefone_paciente);
+        x_and_y_coordinates(print,22);printf("Comorbidade");scanf("d",pac.comorbidade_paciente);
         fwrite(&pac, sizeof(pac), 1, openfile);
-        x_and_y_coordinates(40,22); printf("Paciente cadastrado com sucesso.");
+        x_and_y_coordinates(40,24); printf("Paciente cadastrado com sucesso.");
     }
     SetColor(28);
     fclose(openfile);
@@ -248,30 +252,7 @@ void modifica_paciente(){
 }
 
 
-void delete_paciente(){
-    Reset_Window();
-    print_heading("Delete Record");
-    SetColor(45);
-    char paciente_cpf[15];
-    int isFound = 0, print = 37;
-    x_and_y_coordinates(37,10);printf("Enter ID to Delete: ");fflush(stdin);
-    gets(paciente_cpf);
-    FILE *openfile, *temporary;
-    openfile = fopen("record.txt","rb");
-    temporary = fopen("temp.txt", "wb");
-    while(fread(&pac, sizeof(pac),1,openfile) == 1){
-        if(strcmp(paciente_cpf, pac.paciente_cpf) == 0){
-            fwrite(&pac,sizeof(pac),1,temporary);
-        }
-    }
-    fclose(openfile);
-    fclose(temporary);
-    remove("record.txt");
-    rename("temp.txt","record.txt");
-    x_and_y_coordinates(37,12);printf("The record is sucessfully deleted");
-    SetColor(28);
-    return;
-}
+/* janela com opcoes com comando switch */
 
 void main_window(){
     int option;
@@ -281,9 +262,8 @@ void main_window(){
         x_and_y_coordinates(x,8);printf("Opcaoo 01 - Cadastrar Paciente");
         x_and_y_coordinates(x,10);printf("Opcao 02 - Pesquisar Paciente");
         x_and_y_coordinates(x,12);printf("Opcao 03 - Modificar Paciente");
-        x_and_y_coordinates(x,14);printf("Opcao 04");
-        x_and_y_coordinates(x,16);printf("Opcao 05 - Fechar Sistema");
-        x_and_y_coordinates(x,18);printf("Escolher opcao: ");
+        x_and_y_coordinates(x,14);printf("Opcao 05 - Fechar Sistema");
+        x_and_y_coordinates(x,16);printf("Escolher opcao: ");
         scanf("%d",&option);
         switch(option){
             case 1:
@@ -296,9 +276,6 @@ void main_window(){
                 modifica_paciente();
                 break;
             case 4:
-                delete_paciente();
-                break;
-            case 5:
                 exit(0);
                 break;
             default:
@@ -310,8 +287,8 @@ void main_window(){
 }
 
 int main(){
-    ClearConsoleToColors(17,15);
-    SetConsoleTitle("Cadastro de Pacientes - COVID19");
+    ClearConsoleToColors(8,15);
+    SetConsoleTitle("Cadastro de Pacientes - COVID 19");
     window();
     main_window();
     return 0;
