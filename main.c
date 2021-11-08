@@ -257,7 +257,7 @@ void modifica_paciente(){
 void main_window(){
     int option;
     SetColor(28);
-    int x = 2;
+    int x = 2; 
     while(1){
         x_and_y_coordinates(x,8);printf("Opcaoo 01 - Cadastrar Paciente");
         x_and_y_coordinates(x,10);printf("Opcao 02 - Pesquisar Paciente");
