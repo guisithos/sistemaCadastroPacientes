@@ -291,6 +291,6 @@ int main(){
     SetConsoleTitle("Cadastro de Pacientes - COVID 19");
     window();
     main_window();
-    return 0;
+    return 0; 
 }
 
