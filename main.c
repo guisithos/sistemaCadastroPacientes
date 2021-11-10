@@ -7,13 +7,15 @@
 /* Definir o registro chamado paciente, onde entram todos os dados */
 
 struct paciente{
-    char paciente_cpf[11];
-    char nome_paciente[35];
-    char endereco_paciente[40];
-    int nascimento_paciente[4];
-    char email_paciente[35];
-    int telefone_paciente[11];
-    char comorbidade_paciente[30];
+
+    char nome_paciente[50];
+    int cpf_paciente[11];
+    char telefone_paciente[10];
+    char endereco_paciente[60];
+    int nascimento_paciente[10];
+    char email_paciente[40];
+    char data_diagnostico[30];
+    char comorbidade_pasciente[30];
 };
 
 struct paciente pac;
@@ -170,15 +172,16 @@ void cadastro_paciente(){
 
     }else{
         fflush(stdin);
-        x_and_y_coordinates(print,10);printf("CPF: ");gets(pac.paciente_cpf);
-        x_and_y_coordinates(print,12);printf("Nome: ");gets(pac.nome_paciente);
-        x_and_y_coordinates(print,14);printf("Endereco: ");gets(pac.endereco_paciente);
-        x_and_y_coordinates(print,16);printf("Data de Nascimento: ");gets(pac.nascimento_paciente);
-        x_and_y_coordinates(print,18);printf("Email: ");scanf("%d",&pac.email_paciente);
-        x_and_y_coordinates(print,20);printf("Telefone: ");scanf("%d",&pac.telefone_paciente);
-        x_and_y_coordinates(print,22);printf("Comorbidade");scanf("d",pac.comorbidade_paciente);
+        x_and_y_coordinates(print,10);printf("Nome do Paciente: ");gets(pac.nome_paciente);
+        x_and_y_coordinates(print,12);printf("CPF: ");gets(pac.cpf_paciente);
+        x_and_y_coordinates(print,14);printf("Telefone: ");gets(pac.telefone_paciente);
+        x_and_y_coordinates(print,16);printf("Endereco: ");gets(pac.endereco_paciente);
+        x_and_y_coordinates(print,18);printf("Ano de Nascimento: ");gets(pac.nascimento_paciente);
+        x_and_y_coordinates(print,20);printf("E-email ");gets(pac.email_paciente);
+        x_and_y_coordinates(print,22);printf("Data do Diagnostico: ");gets(pac.data_diagnostico);
+        x_and_y_coordinates(print,24);printf("Alguma comorbidade? Preencher: ");gets(pac.comorbidade_pasciente);
         fwrite(&pac, sizeof(pac), 1, openfile);
-        x_and_y_coordinates(40,24); printf("Paciente cadastrado com sucesso.");
+        x_and_y_coordinates(40,26); printf("Paciente cadastrado com sucesso.");
     }
     SetColor(28);
     fclose(openfile);
@@ -189,28 +192,28 @@ void search_paciente(){
     Reset_Window();
     print_heading("Pesquisa de Pacientes");
     SetColor(45);
-    char paciente_cpf[15];
+    char cpf_paciente[11];
     int isFound = 0;
     x_and_y_coordinates(37,10);printf("CPF a pesquisar: ");fflush(stdin);
-    gets(paciente_cpf);
+    gets(cpf_paciente);
     FILE *openfile;
     openfile = fopen("record.txt","rb");
     while(fread(&pac,sizeof(pac),1,openfile) == 1){
-        if(strcmp(paciente_cpf,pac.paciente_cpf) == 0){
+        if(strcmp(cpf_paciente,pac.cpf_paciente) == 0){
             isFound = 1;
             break;
         }
     }
     if(isFound == 1){
         x_and_y_coordinates(37,12);printf("CPF Encontrado");
-        x_and_y_coordinates(37,14);printf("CPF: %s",pac.paciente_cpf);
+        x_and_y_coordinates(37,14);printf("CPF: %s",pac.cpf_paciente);
         x_and_y_coordinates(37,15);printf("Nome: %s",pac.nome_paciente);
-        x_and_y_coordinates(37,16);printf("Endere�o: %s",pac.endereco_paciente);
+        x_and_y_coordinates(37,16);printf("Endereco: %s",pac.endereco_paciente);
         x_and_y_coordinates(37,17);printf("Data de Nascimento: %s",pac.nascimento_paciente);
         x_and_y_coordinates(37,18);printf("Email: %d",pac.email_paciente);
         x_and_y_coordinates(37,19);printf("Telefone: %ld",pac.telefone_paciente);
     }else{
-        x_and_y_coordinates(37,12);printf("CPF n�o encontrado");
+        x_and_y_coordinates(37,12);printf("CPF nao encontrado");
     }
     SetColor(28);
     fclose(openfile);
@@ -221,18 +224,18 @@ void modifica_paciente(){
     Reset_Window();
     print_heading("Atualizar dados - Paciente");
     SetColor(45);
-    char paciente_cpf[15];
+    char cpf_paciente[15];
     int isFound = 0, print = 37;
     x_and_y_coordinates(37,10);printf("Digite CPF: ");fflush(stdin);
-    gets(paciente_cpf);
+    gets(cpf_paciente);
     FILE *openfile;
     openfile = fopen("record.txt","rb+");
     while(fread(&pac, sizeof(pac),1,openfile) == 1){
-        if(strcmp(paciente_cpf, pac.paciente_cpf) == 0){
+        if(strcmp(cpf_paciente, pac.cpf_paciente) == 0){
             fflush(stdin);
-            x_and_y_coordinates(print,12);printf("CPF: ");gets(pac.paciente_cpf);
+            x_and_y_coordinates(print,12);printf("CPF: ");gets(pac.cpf_paciente);
             x_and_y_coordinates(print,13);printf("Nome: ");gets(pac.nome_paciente);
-            x_and_y_coordinates(print,14);printf("Endere�o: ");gets(pac.endereco_paciente);
+            x_and_y_coordinates(print,14);printf("Endereco: ");gets(pac.endereco_paciente);
             x_and_y_coordinates(print,15);printf("Ano Nascimento: ");gets(pac.nascimento_paciente);
             x_and_y_coordinates(print,16);printf("Email: ");scanf("%d",&pac.email_paciente);
             x_and_y_coordinates(print,17);printf("Telefone: ");scanf("%ld",&pac.telefone_paciente);
@@ -257,9 +260,9 @@ void modifica_paciente(){
 void main_window(){
     int option;
     SetColor(28);
-    int x = 2; 
+    int x = 2;
     while(1){
-        x_and_y_coordinates(x,8);printf("Opcaoo 01 - Cadastrar Paciente");
+        x_and_y_coordinates(x,8);printf("Opcao 01 - Cadastrar Paciente");
         x_and_y_coordinates(x,10);printf("Opcao 02 - Pesquisar Paciente");
         x_and_y_coordinates(x,12);printf("Opcao 03 - Modificar Paciente");
         x_and_y_coordinates(x,14);printf("Opcao 05 - Fechar Sistema");
@@ -293,4 +296,3 @@ int main(){
     main_window();
     return 0;
 }
-
