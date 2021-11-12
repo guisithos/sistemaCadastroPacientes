@@ -103,7 +103,7 @@ void Drawing_Rectangle(){
     for(a = 24; a > 0; a--){
         x_and_y_coordinates(0,a);
         if(a == 6){
-            printf("%c",204);
+            printf("%c",300);
         }else{
             printf("%c",186);
         }
@@ -145,7 +145,7 @@ void window(){
     x_and_y_coordinates(31,4);
     printf("UNIP");
     x_and_y_coordinates(22,24);
-    SetColor(13);
+    SetColor(12);
 
 }
 
@@ -181,7 +181,7 @@ void cadastro_paciente(){
         x_and_y_coordinates(print,22);printf("Data do Diagnostico: ");gets(pac.data_diagnostico);
         x_and_y_coordinates(print,24);printf("Alguma comorbidade? Preencher: ");gets(pac.comorbidade_pasciente);
         fwrite(&pac, sizeof(pac), 1, openfile);
-        x_and_y_coordinates(40,26); printf("Paciente cadastrado com sucesso.");
+        x_and_y_coordinates(20,26); printf("Paciente cadastrado com sucesso.");
     }
     SetColor(28);
     fclose(openfile);
@@ -209,7 +209,7 @@ void search_paciente(){
         x_and_y_coordinates(37,14);printf("CPF: %s",pac.cpf_paciente);
         x_and_y_coordinates(37,15);printf("Nome: %s",pac.nome_paciente);
         x_and_y_coordinates(37,16);printf("Endereco: %s",pac.endereco_paciente);
-        x_and_y_coordinates(37,17);printf("Data de Nascimento: %s",pac.nascimento_paciente);
+        x_and_y_coordinates(37,17);printf("Ano de Nascimento: %s",pac.nascimento_paciente);
         x_and_y_coordinates(37,18);printf("Email: %d",pac.email_paciente);
         x_and_y_coordinates(37,19);printf("Telefone: %ld",pac.telefone_paciente);
     }else{
@@ -237,8 +237,8 @@ void modifica_paciente(){
             x_and_y_coordinates(print,13);printf("Nome: ");gets(pac.nome_paciente);
             x_and_y_coordinates(print,14);printf("Endereco: ");gets(pac.endereco_paciente);
             x_and_y_coordinates(print,15);printf("Ano Nascimento: ");gets(pac.nascimento_paciente);
-            x_and_y_coordinates(print,16);printf("Email: ");scanf("%d",&pac.email_paciente);
-            x_and_y_coordinates(print,17);printf("Telefone: ");scanf("%ld",&pac.telefone_paciente);
+            x_and_y_coordinates(print,16);printf("Email: ");gets(pac.email_paciente);
+            x_and_y_coordinates(print,17);printf("Telefone: ");gets(pac.telefone_paciente);
             fseek(openfile,-sizeof(pac), SEEK_CUR);
             fwrite(&pac,sizeof(pac), 1, openfile);
             x_and_y_coordinates(40,22); printf("Dados atualizados com sucesso!");
@@ -254,6 +254,10 @@ void modifica_paciente(){
     return;
 }
 
+void salva_registros(){
+
+
+}
 
 /* janela com opcoes com comando switch */
 
@@ -265,8 +269,9 @@ void main_window(){
         x_and_y_coordinates(x,8);printf("Opcao 01 - Cadastrar Paciente");
         x_and_y_coordinates(x,10);printf("Opcao 02 - Pesquisar Paciente");
         x_and_y_coordinates(x,12);printf("Opcao 03 - Modificar Paciente");
-        x_and_y_coordinates(x,14);printf("Opcao 05 - Fechar Sistema");
-        x_and_y_coordinates(x,16);printf("Escolher opcao: ");
+        x_and_y_coordinates(x,14);printf("Opcao 04 - Fechar Sistema");
+        x_and_y_coordinates(x,16);printf("Opcao 5 - Exporta Registros");
+        x_and_y_coordinates(x,19);printf("Escolher opcao: ");
         scanf("%d",&option);
         switch(option){
             case 1:
@@ -280,6 +285,9 @@ void main_window(){
                 break;
             case 4:
                 exit(0);
+                break;
+            case 5:
+                salva_registros();
                 break;
             default:
                 break;
