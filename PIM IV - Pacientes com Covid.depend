@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1636600042 source:c:\users\gui\desktop\pim iv - pacientes com covid\main.c
+	<stdio.h>
+	<string.h>
+	<conio.h>
+	<stdlib.h>
+	<windows.h>
+
