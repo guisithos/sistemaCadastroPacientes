@@ -18,6 +18,20 @@ struct paciente
     char comorbidade[30];
 };
 
+struct endereco
+{
+    char rua[40];
+    int numero[5];
+    char bairro[20];
+    char cidade[20];
+    char estado[2];
+    int cep[12];
+};
+
+int ano = 2021;
+
+struct endereco ender;
+
 struct paciente pac;
 
 void SetColor(int ForgC)
@@ -206,15 +220,20 @@ void cadastro_paciente()
     {
         fflush(stdin);
         x_and_y_coordinates(print,10);printf("Nome do Paciente: ");gets(pac.nome);
-        x_and_y_coordinates(print,12);printf("CPF: ");gets(pac.cpf);
-        x_and_y_coordinates(print,14);printf("Telefone: ");gets(pac.telefone);
-        x_and_y_coordinates(print,16);printf("Endereco: ");gets(pac.endereco);
-        x_and_y_coordinates(print,18);printf("Ano de Nascimento: ");gets(pac.nascimento);
+        x_and_y_coordinates(print,11);printf("CPF: ");gets(pac.cpf);
+        x_and_y_coordinates(print,12);printf("Telefone: ");gets(pac.telefone);
+        x_and_y_coordinates(print,13);printf("Endereco /RUA: ");gets(ender.rua);
+        x_and_y_coordinates(print,14);printf("Endereco /NUM: ");gets(ender.numero);
+        x_and_y_coordinates(print,15);printf("Endereco /BAIRRO: ");gets(ender.bairro);
+        x_and_y_coordinates(print,16);printf("Endereco /CID: ");gets(ender.cidade);
+        x_and_y_coordinates(print,17);printf("Endereco /UF: ");gets(ender.estado);
+        x_and_y_coordinates(print,18);printf("Endereco /CEP: ");gets(ender.cep);
+        x_and_y_coordinates(print,19);printf("Ano de Nascimento: ");gets(pac.nascimento);
         x_and_y_coordinates(print,20);printf("E-email ");gets(pac.email);
-        x_and_y_coordinates(print,22);printf("Data do Diagnostico: ");gets(pac.diagnostico);
-        x_and_y_coordinates(print,24);printf("Alguma comorbidade? Preencher: ");gets(pac.comorbidade);
+        x_and_y_coordinates(print,21);printf("Data do Diagnostico: ");gets(pac.diagnostico);
+        x_and_y_coordinates(print,22);printf("Alguma comorbidade? Preencher: ");gets(pac.comorbidade);
         fwrite(&pac, sizeof(pac), 1, openfile);
-        x_and_y_coordinates(20,26); printf("Paciente cadastrado com sucesso.");
+        x_and_y_coordinates(40,24); printf("Paciente cadastrado com sucesso.");
     }
     SetColor(28);
     fclose(openfile);
@@ -224,11 +243,11 @@ void cadastro_paciente()
 void search_paciente()
 {
     Reset_Window();
-    print_heading("Pesquisa de Pacientes");
+    print_heading("Pesquisa");
     SetColor(45);
     char cpf_paciente[11];
     int isFound = 0;
-    x_and_y_coordinates(37,10);printf("CPF a pesquisar: ");fflush(stdin);
+    x_and_y_coordinates(37,9);printf("CPF a pesquisar: ");fflush(stdin);
     gets(pac.cpf);
     FILE *openfile;
     openfile = fopen("record.txt","rb");
@@ -243,15 +262,20 @@ void search_paciente()
     }
     if(isFound == 1)
     {
-        x_and_y_coordinates(37,12);printf("CPF Encontrado");
-        x_and_y_coordinates(37,14);printf("Nome: %s",pac.nome);
-        x_and_y_coordinates(37,15);printf("CPF: %s",pac.cpf);
-        x_and_y_coordinates(37,16);printf("Telefone: %s",pac.telefone);
-        x_and_y_coordinates(37,17);printf("Endereco: %s",pac.endereco);
-        x_and_y_coordinates(37,18);printf("Idade: %d",pac.nascimento);
-        x_and_y_coordinates(37,19);printf("E-mail : %ld",pac.email);
-        x_and_y_coordinates(37,20);printf("Data de Diagnostico : %ld",pac.diagnostico);
-        x_and_y_coordinates(37,21);printf("Comorbidade : %ld",pac.comorbidade);
+        x_and_y_coordinates(37,10);printf("CPF Encontrado");
+        x_and_y_coordinates(37,12);printf("Nome: %s",pac.nome);
+        x_and_y_coordinates(37,13);printf("CPF: %s",pac.cpf);
+        x_and_y_coordinates(37,14);printf("Telefone: %s",pac.telefone);
+        x_and_y_coordinates(37,15);printf("Endereco: %s",ender.rua);
+        x_and_y_coordinates(37,16);printf("Endereco /NUM: %s", ender.numero);
+        x_and_y_coordinates(37,17);printf("Endereco /BAIRRO: %s", ender.bairro);
+        x_and_y_coordinates(37,18);printf("Endereco /CID: %s", ender.cidade);
+        x_and_y_coordinates(37,19);printf("Endereco /UF: %s", ender.estado);
+        x_and_y_coordinates(37,20);printf("Endereco /CEP: %s", ender.cep);
+        x_and_y_coordinates(37,21);printf("Idade: %d",pac.nascimento);
+        x_and_y_coordinates(37,22);printf("E-mail : %ld",pac.email);
+        x_and_y_coordinates(37,23);printf("Data de Diagnostico : %ld",pac.diagnostico);
+        x_and_y_coordinates(37,24);printf("Comorbidade : %ld",pac.comorbidade);
     }
     else
      {
@@ -279,14 +303,19 @@ void modifica_paciente()
         if(strcmp(cpf, pac.cpf) == 0)
            {
             fflush(stdin);
-            x_and_y_coordinates(print,12);printf("Nome: ");gets(pac.nome);
-            x_and_y_coordinates(print,13);printf("CPF: ");gets(pac.cpf);
-            x_and_y_coordinates(print,14);printf("Telefone: ");gets(pac.telefone);
-            x_and_y_coordinates(print,15);printf("Endereco: ");gets(pac.endereco);
-            x_and_y_coordinates(print,16);printf("Ano de Nascimento: ");gets(pac.nascimento);
-            x_and_y_coordinates(print,17);printf("E-mail: ");gets(pac.email);
-            x_and_y_coordinates(print,18);printf("Data de Diagnostico: ");gets(pac.diagnostico);
-            x_and_y_coordinates(print,19);printf("Comorbidade: ");gets(pac.comorbidade);
+            x_and_y_coordinates(print,10);printf("Nome do Paciente: ");gets(pac.nome);
+            x_and_y_coordinates(print,11);printf("CPF: ");gets(pac.cpf);
+            x_and_y_coordinates(print,12);printf("Telefone: ");gets(pac.telefone);
+            x_and_y_coordinates(print,13);printf("Endereco /RUA: ");gets(ender.rua);
+            x_and_y_coordinates(print,14);printf("Endereco /NUM: ");gets(ender.numero);
+            x_and_y_coordinates(print,15);printf("Endereco /BAIRRO: ");gets(ender.bairro);
+            x_and_y_coordinates(print,16);printf("Endereco /CID: ");gets(ender.cidade);
+            x_and_y_coordinates(print,17);printf("Endereco /UF: ");gets(ender.estado);
+            x_and_y_coordinates(print,18);printf("Endereco /CEP: ");gets(ender.cep);
+            x_and_y_coordinates(print,19);printf("Ano de Nascimento: ");gets(pac.nascimento);
+            x_and_y_coordinates(print,20);printf("E-email ");gets(pac.email);
+            x_and_y_coordinates(print,21);printf("Data do Diagnostico: ");gets(pac.diagnostico);
+            x_and_y_coordinates(print,22);printf("Alguma comorbidade? Preencher: ");gets(pac.comorbidade);
 
             fseek(openfile,-sizeof(pac), SEEK_CUR);
             fwrite(&pac,sizeof(pac), 1, openfile);
@@ -296,16 +325,47 @@ void modifica_paciente()
            }
         }
     if(!isFound)
+
     {
         x_and_y_coordinates(print, 12);printf("CPF nao localizado");
     }
+
     fclose(openfile);
     SetColor(28);
     return;
 }
 
-void salva_registros()
+
+void exporta_pac()
 {
+    Reset_Window();
+    print_heading("Exportar Casos positivos");
+    int print = 37;
+    FILE *openfile;
+    openfile = fopen("casos.txt","ab+");
+    SetColor(45);
+
+    if(openfile == NULL)
+
+     {
+        MessageBox(0,"Erro ao executar arquivo","ERRO!",0);
+
+     }
+
+    else
+    {
+        fflush(stdin);
+
+        x_and_y_coordinates(print,14);printf("Idade paciente ");gets(pac.nascimento - ano);
+        x_and_y_coordinates(print,15);printf("Alguma comorbidade? Preencher: ");gets(pac.comorbidade);
+        fwrite(&pac, sizeof(pac), 1, openfile);
+
+        x_and_y_coordinates(20,26); printf("Arquivo exportado");
+    }
+
+    SetColor(28);
+    fclose(openfile);
+    return;
 
 
 }
@@ -322,8 +382,8 @@ void main_window()
         x_and_y_coordinates(x,8);printf("Opcao 01 - Cadastrar Paciente");
         x_and_y_coordinates(x,10);printf("Opcao 02 - Pesquisar Paciente");
         x_and_y_coordinates(x,12);printf("Opcao 03 - Modificar Paciente");
-        x_and_y_coordinates(x,14);printf("Opcao 04 - Fechar Sistema");
-        x_and_y_coordinates(x,16);printf("Opcao 5 - Exporta Registros");
+        x_and_y_coordinates(x,14);printf("Opcao 04 - Exportar Registros");
+        x_and_y_coordinates(x,16);printf("Opcao 05 - Fechar sistema");
         x_and_y_coordinates(x,19);printf("Escolher opcao: ");
         scanf("%d",&option);
 
@@ -342,11 +402,11 @@ void main_window()
                 break;
 
             case 4:
-                exit(0);
+                exporta_pac();
                 break;
 
             case 5:
-                salva_registros();
+                exit(0);
                 break;
 
             default:
