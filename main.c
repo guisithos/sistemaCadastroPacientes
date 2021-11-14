@@ -10,11 +10,11 @@ struct paciente
 {
     char nome[50];
     int cpf[11];
-    char telefone[10];
+    int telefone[10];
     char endereco[60];
     int nascimento[10];
     char email[40];
-    char diagnostico[30];
+    int diagnostico[30];
     char comorbidade[30];
 };
 
@@ -28,7 +28,8 @@ struct endereco
     int cep[12];
 };
 
-int ano = 2021;
+int ano;
+ano = 2021;
 
 struct endereco ender;
 
@@ -41,7 +42,7 @@ void SetColor(int ForgC)
      CONSOLE_SCREEN_BUFFER_INFO conscrbufinfo;
      if(GetConsoleScreenBufferInfo(pacienteHandleOutput, &conscrbufinfo))
      {
-          wordcolor = (conscrbufinfo.wAttributes & 0xF0) + (ForgC & 0x0F);
+          wordcolor = (conscrbufinfo.wAttributes & 0xF0) + (ForgC & 0xF0);
           SetConsoleTextAttribute(pacienteHandleOutput, wordcolor);
      }
      return;
@@ -212,10 +213,12 @@ void cadastro_paciente()
     SetColor(45);
 
     if(openfile == NULL)
+
      {
         MessageBox(0,"Erro ao executar arquivo","ERRO!",0);
 
      }
+
     else
     {
         fflush(stdin);
@@ -253,8 +256,10 @@ void search_paciente()
     openfile = fopen("record.txt","rb");
 
     while(fread(&pac,sizeof(pac),1,openfile) == 1)
+
     {
         if(strcmp(pac.cpf, pac.cpf) == 0)
+
         {
             isFound = 1;
             break;
@@ -264,29 +269,33 @@ void search_paciente()
     {
         x_and_y_coordinates(37,10);printf("CPF Encontrado");
         x_and_y_coordinates(37,12);printf("Nome: %s",pac.nome);
-        x_and_y_coordinates(37,13);printf("CPF: %s",pac.cpf);
-        x_and_y_coordinates(37,14);printf("Telefone: %s",pac.telefone);
+        x_and_y_coordinates(37,13);printf("CPF: %d",pac.cpf);
+        x_and_y_coordinates(37,14);printf("Telefone: %d",pac.telefone);
         x_and_y_coordinates(37,15);printf("Endereco: %s",ender.rua);
-        x_and_y_coordinates(37,16);printf("Endereco /NUM: %s", ender.numero);
+        x_and_y_coordinates(37,16);printf("Endereco /NUM: %d", ender.numero);
         x_and_y_coordinates(37,17);printf("Endereco /BAIRRO: %s", ender.bairro);
         x_and_y_coordinates(37,18);printf("Endereco /CID: %s", ender.cidade);
         x_and_y_coordinates(37,19);printf("Endereco /UF: %s", ender.estado);
-        x_and_y_coordinates(37,20);printf("Endereco /CEP: %s", ender.cep);
+        x_and_y_coordinates(37,20);printf("Endereco /CEP: %ld", ender.cep);
         x_and_y_coordinates(37,21);printf("Idade: %d",pac.nascimento);
-        x_and_y_coordinates(37,22);printf("E-mail : %ld",pac.email);
-        x_and_y_coordinates(37,23);printf("Data de Diagnostico : %ld",pac.diagnostico);
-        x_and_y_coordinates(37,24);printf("Comorbidade : %ld",pac.comorbidade);
+        x_and_y_coordinates(37,22);printf("E-mail : %s",pac.email);
+        x_and_y_coordinates(37,23);printf("Data de Diagnostico : %d",pac.diagnostico);
+        x_and_y_coordinates(37,24);printf("Comorbidade : %s",pac.comorbidade);
     }
+
     else
+
      {
         x_and_y_coordinates(37,12);printf("CPF nao encontrado");
      }
+
     SetColor(28);
     fclose(openfile);
     return;
 }
 
 void modifica_paciente()
+
 {
     Reset_Window();
     print_heading("Atualizar dados - Paciente");
