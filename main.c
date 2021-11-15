@@ -38,12 +38,12 @@ struct paciente pac;
 void SetColor(int ForgC)
 {
      WORD wordcolor;
-     HANDLE pacienteHandleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+     HANDLE studentHandleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
      CONSOLE_SCREEN_BUFFER_INFO conscrbufinfo;
-     if(GetConsoleScreenBufferInfo(pacienteHandleOutput, &conscrbufinfo))
+     if(GetConsoleScreenBufferInfo(studentHandleOutput, &conscrbufinfo))
      {
-          wordcolor = (conscrbufinfo.wAttributes & 0xF0) + (ForgC & 0xF0);
-          SetConsoleTextAttribute(pacienteHandleOutput, wordcolor);
+          wordcolor = (conscrbufinfo.wAttributes & 0xF0) + (ForgC & 0x0F);
+          SetConsoleTextAttribute(studentHandleOutput, wordcolor);
      }
      return;
 }
@@ -52,7 +52,7 @@ void ClearConsoleToColors(int ForgC, int BackC)
 {
      WORD wordColor = ((BackC & 0x0F) << 4) + (ForgC & 0x0F);
 
-     HANDLE pacienteHandleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+     HANDLE studentHandleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
 
      COORD coordinates = {0, 0};
 
@@ -60,18 +60,17 @@ void ClearConsoleToColors(int ForgC, int BackC)
 
      CONSOLE_SCREEN_BUFFER_INFO conscrbufinfo;
 
-     SetConsoleTextAttribute(pacienteHandleOutput, wordColor);
-     if(GetConsoleScreenBufferInfo(pacienteHandleOutput, &conscrbufinfo))
+     SetConsoleTextAttribute(studentHandleOutput, wordColor);
+     if(GetConsoleScreenBufferInfo(studentHandleOutput, &conscrbufinfo))
      {
 
-          FillConsoleOutputCharacter(pacienteHandleOutput, (TCHAR) 32, conscrbufinfo.dwSize.X * conscrbufinfo.dwSize.Y, coordinates, &counting);
-          FillConsoleOutputAttribute(pacienteHandleOutput, conscrbufinfo.wAttributes, conscrbufinfo.dwSize.X * conscrbufinfo.dwSize.Y, coordinates, &counting );
+          FillConsoleOutputCharacter(studentHandleOutput, (TCHAR) 32, conscrbufinfo.dwSize.X * conscrbufinfo.dwSize.Y, coordinates, &counting);
+          FillConsoleOutputAttribute(studentHandleOutput, conscrbufinfo.wAttributes, conscrbufinfo.dwSize.X * conscrbufinfo.dwSize.Y, coordinates, &counting );
 
-          SetConsoleCursorPosition(pacienteHandleOutput, coordinates);
+          SetConsoleCursorPosition(studentHandleOutput, coordinates);
      }
      return;
 }
-
 
 void Setting_Color_And_Background(int ForgC, int BackC)
 {
@@ -80,101 +79,77 @@ void Setting_Color_And_Background(int ForgC, int BackC)
      return;
 }
 
-
 COORD coordinates = {0,0};
-void x_and_y_coordinates(int x, int y)
-  {
+void x_and_y_coordinates(int x, int y){
     coordinates.X = x; coordinates.Y = y;
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coordinates);
-  }
+}
 
-void Drawing_Rectangle()
- {
+void Drawing_Rectangle(){
     int a, b;
     x_and_y_coordinates(0,0);
     printf("%c",201);
-    for(a = 1; a < 78; a++)
-      {
+    for(a = 1; a < 78; a++){
         x_and_y_coordinates(a, 0);
         printf("%c",205);
-      }
+    }
     x_and_y_coordinates(78,0);
     printf("%c",187);
-    for(a = 1; a < 25; a++)
-       {
+    for(a = 1; a < 25; a++){
         x_and_y_coordinates(78, a);
-        if(a == 6)
-         {
+        if(a == 6){
             printf("%c",185);
-         }
-    else
-          {
+        }else{
             printf("%c",186);
-          }
+        }
     }
     x_and_y_coordinates(78, 25);
     printf("%c",188);
-    for(a = 77; a > 0; a--)
-{
+    for(a = 77; a > 0; a--){
         x_and_y_coordinates(a,25);
-        if(a == 35)
-         {
+        if(a == 35){
             printf("%c",202);
-         }
-    else
-        {
+        }else{
             printf("%c",205);
         }
-}
+    }
     x_and_y_coordinates(0,25);
     printf("%c",200);
-    for(a = 24; a > 0; a--)
-      {
+    for(a = 24; a > 0; a--){
         x_and_y_coordinates(0,a);
-        if(a == 6)
-          {
-            printf("%c",300);
-          }
-    else
-         {
+        if(a == 6){
+            printf("%c",204);
+        }else{
             printf("%c",186);
-         }
-      }
-
-    for(a = 1; a < 78; a++)
-    {
-        x_and_y_coordinates(a,6);
-        if(a == 35)
-          {
-            printf("%c",203);
-          }
-        else
-         {
-            printf("%c",205);
-         }
+        }
     }
 
-    for(a = 7; a < 25; a++)
-     {
+    for(a = 1; a < 78; a++){
+        x_and_y_coordinates(a,6);
+        if(a == 35){
+            printf("%c",203);
+        }else{
+            printf("%c",205);
+        }
+    }
+
+    for(a = 7; a < 25; a++){
         x_and_y_coordinates(35,a);
         printf("%c",186);
-     }
+    }
 
 }
 
-void Reset_Window()
-{
+void Reset_Window(){
     int a,b;
-
-    for(a = 37; a < 78; a++)
-    {
-        for(b = 7; b < 25; b++)
-          {
+    for(a = 37; a < 78; a++){
+        for(b = 7; b < 25; b++){
             x_and_y_coordinates(a,b);printf(" ");
-          }
+        }
     }
     return;
 }
+
 
 void window()
   {
