@@ -247,6 +247,7 @@ void pesquisa_paciente()
 
       {
         x_and_y_coordinates(37,8);printf("Registro encontrado");
+
         x_and_y_coordinates(37,10);printf("Nome: %s",pac.nome);
         x_and_y_coordinates(37,11);printf("CPF: %s",pac.cpf);
         x_and_y_coordinates(37,12);printf("Telefone: %s",pac.telefone);
