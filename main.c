@@ -248,15 +248,15 @@ void pesquisa_paciente()
       {
         x_and_y_coordinates(37,8);printf("Registro encontrado");
         x_and_y_coordinates(37,10);printf("Nome: %s",pac.nome);
-        x_and_y_coordinates(37,11);printf("CPF: %d",pac.cpf);
-        x_and_y_coordinates(37,12);printf("Telefone: %d",pac.telefone);
+        x_and_y_coordinates(37,11);printf("CPF: %s",pac.cpf);
+        x_and_y_coordinates(37,12);printf("Telefone: %s",pac.telefone);
         x_and_y_coordinates(37,13);printf("Endereco *Rua: %s",pac.rua);
         x_and_y_coordinates(37,14);printf("Endereco *Cid: %s",pac.cidade);
         x_and_y_coordinates(37,15);printf("Endereco *UF: %s",pac.uf);
-        x_and_y_coordinates(37,16);printf("Endereco *CEP: %d" ,pac.cep);
-        x_and_y_coordinates(37,17);printf("Idade : %d",pac.nascimento);
+        x_and_y_coordinates(37,16);printf("Endereco *CEP: %s" ,pac.cep);
+        x_and_y_coordinates(37,17);printf("Idade : %s",pac.nascimento);
         x_and_y_coordinates(37,18);printf("Email: %s",pac.email);
-        x_and_y_coordinates(37,19);printf("Data do Diagnostico: %d",pac.diagnostico);
+        x_and_y_coordinates(37,19);printf("Data do Diagnostico: %s",pac.diagnostico);
         x_and_y_coordinates(37,20);printf("Comorbidade: %s",pac.comorbidade);
 
       }
