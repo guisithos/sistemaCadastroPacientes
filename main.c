@@ -157,10 +157,11 @@ void window()
 
 
 void print_heading(const char st[])
+
    {
     Setting_Color_And_Background(31,28);
 
-    x_and_y_coordinates(38,8);printf("Cadastro de Pacientes : %s",st);
+    x_and_y_coordinates(38,7);printf("Menu atual - %s",st);
 
     Setting_Color_And_Background(17,15);
   }
@@ -173,7 +174,7 @@ int configuration_record(char id[])
 void cadastro_paciente()
 {
     Reset_Window();
-    print_heading("Cadastrar Paciente: ");
+    print_heading("Cadastrar: ");
 
     int print = 37;
 
