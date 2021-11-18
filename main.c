@@ -349,7 +349,7 @@ void exporta_dados()
             fseek(openfile,-sizeof(pac), SEEK_CUR);
             fwrite(&pac,sizeof(pac), 1, openfile);
 
-            x_and_y_coordinates(40,22); printf("New Student is Updated Successfully");
+            x_and_y_coordinates(40,22); printf("Exportado com sucesso");
 
             isFound = 1;
 
@@ -360,7 +360,7 @@ void exporta_dados()
     if(!isFound)
 
     {
-        x_and_y_coordinates(print, 12);printf("No Record Found");
+        x_and_y_coordinates(print, 12);printf("Sem registro");
     }
 
     fclose(openfile);
