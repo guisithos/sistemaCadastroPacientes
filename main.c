@@ -337,14 +337,14 @@ void exporta_dados()
         if(strcmp(cpf, pac.cpf) == 0)
          {
             fflush(stdin);
-            x_and_y_coordinates(print,11);printf("Idade do paciente: %d", pac.nascimento - ano);
+            x_and_y_coordinates(print,11);printf("Idade do paciente ");scanf("d",pac.nascimento - ano);
 
-            x_and_y_coordinates(print,12);printf("ID: ");gets(pac.cpf);
-            x_and_y_coordinates(print,13);printf("Name: ");gets(pac.cpf);
-            x_and_y_coordinates(print,14);printf("Address: ");gets(pac.cpf);
-            x_and_y_coordinates(print,15);printf("Parent's name: ");gets(pac.cpf);
-            x_and_y_coordinates(print,16);printf("Class: ");scanf("%d",&pac.cpf);
-            x_and_y_coordinates(print,17);printf("Contact Number: ");scanf("%ld",&pac.cpf);
+            x_and_y_coordinates(print,12);printf("nome: ");gets(pac.cpf);
+            x_and_y_coordinates(print,13);printf("nome: ");gets(pac.cpf);
+            x_and_y_coordinates(print,14);printf("nome: ");gets(pac.cpf);
+            x_and_y_coordinates(print,15);printf("nome: ");gets(pac.cpf);
+            x_and_y_coordinates(print,16);printf("nome: ");scanf("%d",&pac.cpf);
+            x_and_y_coordinates(print,17);printf("nome: ");scanf("%ld",&pac.cpf);
 
             fseek(openfile,-sizeof(pac), SEEK_CUR);
             fwrite(&pac,sizeof(pac), 1, openfile);
